@@ -5,7 +5,7 @@ using System.Text;
 
 namespace dev.budget.business.Models
 {
-    public class BudgetModel
+    public class BudgetModel: BaseModel
     {
         public decimal Calculate(Budget budget)
         {

@@ -9,9 +9,9 @@ namespace dev.budget.business.Entities
     public class Budget
     {
         [Column("id")]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Column("person_id")]
-        public int PersonID { get; set; }
+        public int PersonId { get; set; }
         [Column("dev_count")]
         public int DevCount { get; set; }
         [Column("designer_count")]

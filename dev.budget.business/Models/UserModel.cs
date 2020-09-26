@@ -6,7 +6,7 @@ using System.Text;
 
 namespace dev.budget.business.Models
 {
-    public class UserModel
+    public class UserModel: BaseModel
     {
         public void CreateUser(int person,string username,string password)
         {
@@ -17,7 +17,7 @@ namespace dev.budget.business.Models
             throw new NotImplementedException();
         }
 
-        private static void ValidateUsername(string username)
+        private void ValidateUsername(string username)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace dev.budget.business.Models
             }
         }
 
-        private static void ValidatePassword(string password)
+        private void ValidatePassword(string password)
         {
             try
             {
@@ -71,13 +71,7 @@ namespace dev.budget.business.Models
             }
         }
 
-        private static void ValidateString(string value)
-        {
-            if (String.IsNullOrEmpty(value) || String.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentException();
-            }
-        }
+        
 
         private static void ValidatePerson(int person)
         {

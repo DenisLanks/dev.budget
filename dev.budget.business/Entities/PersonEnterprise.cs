@@ -6,18 +6,17 @@ using System.Text;
 
 namespace dev.budget.business.Entities
 {
-    public class User
+    [Table("PeopleEnterpeises")]
+    public class PersonEnterprise
     {
         [Key]
-        [Column("person_id")]
+        [Column("person_id",Order =0)]
         public int PersonId { get; set; }
-
-        [Column("username")]
-        public string Username { get; set; }
-
-        [Column("password")]
-        public string Password { get; set; }
+        [Key]
+        [Column("enterprise_id",Order =1)]
+        public int EnterpriseId { get; set; }
 
         public Person Person { get; set; }
+        public Enterprise Enterprise { get; set; }
     }
 }

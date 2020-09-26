@@ -9,7 +9,7 @@ namespace dev.budget.business.Entities
     public class Address
     {
         [Column("id")]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Column("postal_code")]
         public string PostalCode { get; set; }
         [Column("name")]

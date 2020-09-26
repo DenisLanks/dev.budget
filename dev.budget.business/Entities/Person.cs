@@ -19,5 +19,11 @@ namespace dev.budget.business.Entities
 
         [Column("cpf")]
         public string CPF { get; set; }
+
+        public User User { get; set; }
+
+        public List<Budget> Budgets { get; set; }
+        public List<PersonEnterprise> PersonEnterprise { get; set; }
+        public List<PersonAddress> PeopleAddresses { get; set; }
     }
 }
