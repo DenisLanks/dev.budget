@@ -9,7 +9,7 @@ namespace dev.budget.business.Entities
     public class Person
     {
         [Column("id")]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Column("name")]
         public string Name { get; set; }

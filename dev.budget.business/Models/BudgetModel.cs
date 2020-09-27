@@ -49,5 +49,14 @@ namespace dev.budget.business.Models
         {
             return Decimal.Multiply(200,count);
         }
+
+        public IEnumerable<Budget> GetBudgets(int person)
+        {
+            if (person == 0)
+            {
+                throw new ArgumentException("Usuário não informado", nameof(person));
+            }
+            return new List<Budget>();
+        }
     }
 }

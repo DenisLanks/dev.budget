@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using dev.budget.business.Entities;
+using dev.budget.business.Exceptions;
 
 namespace dev.budget.business.Models.Tests
 {
@@ -64,6 +65,22 @@ namespace dev.budget.business.Models.Tests
             var model = new BudgetModel();
             var total = model.CalculateDesigner(1);
             Assert.Equal(1050, total, 2);
+        }
+
+        [Fact()]
+        public void GetBudgetsTest()
+        {
+            var model = new BudgetModel();
+            Assert.NotEmpty(model.GetBudgets(1));
+        }
+
+        [Fact()]
+        public void CannotGetBudgetsTest()
+        {
+            var model = new BudgetModel();
+            Assert.Throws<ArgumentException>(()=> {
+                model.GetBudgets(0);
+            });
         }
     }
 }
