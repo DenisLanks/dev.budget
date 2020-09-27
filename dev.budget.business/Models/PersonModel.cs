@@ -1,5 +1,7 @@
 ﻿using dev.budget.business.Entities;
 using dev.budget.business.Exceptions;
+using dev.budget.business.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +11,25 @@ namespace dev.budget.business.Models
 {
     public class PersonModel: BaseModel
     {
+        PersonRepository personRepository;
+        public PersonModel(DbContext dbContext) : base(dbContext)
+        {
+            personRepository = new PersonRepository(context);
+        }
+
         public Person CreatePerson(string name, string lastname, string cpf)
         {
             ValidateString(name);
             ValidateString(lastname);
             ValidateString(cpf);
             ValidateCPF(cpf);
-            throw new NotImplementedException();
+            Person person = new Person() { 
+                Name = name,
+                LastName = lastname,
+                CPF = cpf
+            };
+            personRepository.Insert(person);
+            return person;
         }
 
         private void ValidateCPF(string cpf)
@@ -57,12 +71,12 @@ namespace dev.budget.business.Models
             List<int> sums = new List<int>();
             foreach (var c in str)
             {
-                var digit = Convert.ToInt32(c);
+                var digit = (int)Char.GetNumericValue(c);
                 sums.Add(digit * weight);
                 weight++;
             }
 
-            var sum = sums.Sum();
+            var sum = sums.Sum() + dv1;
             var result = sum % 11;
             return result < 10 ? result : 0;
         }
@@ -70,11 +84,12 @@ namespace dev.budget.business.Models
         private int CalculateDV1(string cpf)
         {
             var weight = 1;
-            var str = cpf.Substring(0, 8);
+            var str = cpf.Substring(0, 9);
             List<int> sums = new List<int>();
             foreach (var c in str)
             {
-                var digit = Convert.ToInt32(c);
+                
+                var digit = (int)Char.GetNumericValue(c);
                 sums.Add(digit * weight);
                 weight++;
             }

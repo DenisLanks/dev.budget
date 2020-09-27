@@ -1,5 +1,7 @@
 ﻿using dev.budget.business.Entities;
 using dev.budget.business.Exceptions;
+using dev.budget.business.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,13 +10,28 @@ namespace dev.budget.business.Models
 {
     public class UserModel: BaseModel
     {
-        public void CreateUser(int person,string username,string password)
+        UserRepository userRepository;
+        public UserModel(DbContext dbContext) : base(dbContext)
+        {
+            userRepository = new UserRepository(dbContext);
+        }
+
+        public User CreateUser(int person,string username,string password)
         {
             ValidatePerson(person);
             ValidateUsername(username);
             ValidatePassword(password);
 
-            throw new NotImplementedException();
+            var user = new User()
+            {
+                PersonId = person,
+                Username = username,
+                Password = password
+            };
+
+            userRepository.Insert(user);
+
+            return user;
         }
 
         private void ValidateUsername(string username)
@@ -86,7 +103,7 @@ namespace dev.budget.business.Models
                 throw new ArgumentException("Usuário ou Senha não informado.", "username password");
             }
 
-            return null;
+            return userRepository.GetByUsernamePassword(username,password);
         }
     }
 }

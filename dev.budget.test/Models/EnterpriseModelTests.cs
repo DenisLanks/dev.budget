@@ -4,21 +4,28 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using dev.budget.business.Exceptions;
+using dev.budget.test.Models;
 
 namespace dev.budget.business.Models.Tests
 {
-    public class EnterpriseModelTests
+    public class EnterpriseModelTests: BaseModelTest
     {
+        public  EnterpriseModelTests():base()
+        {
+        }
+
         [Fact()]
         public void CreateEnterpriseTest()
         {
-            Assert.True(false, "This test needs an implementation");
+            var model = new EnterpriseModel(context);
+            var enterprise = model.CreateEnterprise("Fantasia", "123456000132");
+            Assert.True(enterprise.Id != 0, "Falha ao inserir uma nova empresa");
         }
 
         [Fact()]
         public void CannotCreateEnterpriseWithoutNameTest()
         {
-            var model = new EnterpriseModel();
+            var model = new EnterpriseModel(context);
             Assert.Throws<BusinessException>(() =>
             {
                 model.CreateEnterprise("", "123123213213");
@@ -38,7 +45,7 @@ namespace dev.budget.business.Models.Tests
         [Fact()]
         public void CannotCreateEnterpriseWithoutCNPJTest()
         {
-            var model = new EnterpriseModel();
+            var model = new EnterpriseModel(context);
             Assert.Throws<BusinessException>(() =>
             {
                 model.CreateEnterprise("teste", "");

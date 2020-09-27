@@ -14,6 +14,7 @@ namespace dev.budget.business.Repositories
 
         public BaseRepository(DbContext context)
         {
+            this.context = context;
             dbSet = context.Set<TEntity>();
             
         }

@@ -4,22 +4,32 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using dev.budget.business.Exceptions;
+using Microsoft.EntityFrameworkCore;
+using dev.budget.test.Models;
 
 namespace dev.budget.business.Models.Tests
 {
-    public class UserModelTests
+    public class UserModelTests: BaseModelTest
     {
+        public  UserModelTests():base()
+        {
+        }
+
         [Fact()]
         public void CreateUserTest()
         {
-            var model = new UserModel();
-            model.CreateUser(1, "usuario@teste.com", "senhaTeste");
+            var model = new UserModel(this.context);
+            const string Username = "usuario@teste.com";
+            const string Password = "senhaTeste";
+            model.CreateUser(1, Username, Password);
+            var user = model.GetUser(Username, Password);
+            Assert.NotNull(user);
         }
 
         [Fact()]
         public void CannotUsernameEmptyTest()
         {
-            var model = new UserModel();
+            var model = new UserModel(this.context);
             Assert.Throws<BusinessException>(() =>
             {
                 model.CreateUser(1, "", "senhaTeste");
@@ -29,7 +39,7 @@ namespace dev.budget.business.Models.Tests
         [Fact()]
         public void CannotUsernameNullTest()
         {
-            var model = new UserModel();
+            var model = new UserModel(this.context);
             Assert.Throws<BusinessException>(() =>
             {
                 model.CreateUser(1, null, "senhaTeste");
@@ -39,7 +49,7 @@ namespace dev.budget.business.Models.Tests
         [Fact()]
         public void CannotUsernameWhiteSpaceTest()
         {
-            var model = new UserModel();
+            var model = new UserModel(this.context);
             Assert.Throws<BusinessException>(() =>
             {
                 model.CreateUser(1, " ", "senhaTeste");
@@ -49,7 +59,7 @@ namespace dev.budget.business.Models.Tests
         [Fact]
         public void CannotPasswordLessThan8Test()
         {
-            var model = new UserModel();
+            var model = new UserModel(this.context);
             Assert.Throws<BusinessException>(() =>
             {
                 model.CreateUser(1, "teste@teste.com", "testeSe");
@@ -59,7 +69,7 @@ namespace dev.budget.business.Models.Tests
         [Fact]
         public void CannotPasswordWithoutLowerTest()
         {
-            var model = new UserModel();
+            var model = new UserModel(this.context);
             Assert.Throws<BusinessException>(() =>
             {
                 model.CreateUser(1, "teste@teste.com", "TESTESENHA");
@@ -69,7 +79,7 @@ namespace dev.budget.business.Models.Tests
         [Fact]
         public void CannotPasswordWithoutUpperTest()
         {
-            var model = new UserModel();
+            var model = new UserModel(this.context);
             Assert.Throws<BusinessException>(() =>
             {
                 model.CreateUser(1, "teste@teste.com", "testesenha");
@@ -79,7 +89,7 @@ namespace dev.budget.business.Models.Tests
         [Fact()]
         public void CannotPasswordEmptyTest()
         {
-            var model = new UserModel();
+            var model = new UserModel(this.context);
             Assert.Throws<BusinessException>(() =>
             {
                 model.CreateUser(1, "teste@teste.com", " ");
@@ -89,7 +99,7 @@ namespace dev.budget.business.Models.Tests
         [Fact()]
         public void CannotPasswordNullTest()
         {
-            var model = new UserModel();
+            var model = new UserModel(this.context);
             Assert.Throws<BusinessException>(() =>
             {
                 model.CreateUser(1, "teste@teste.com", null);
@@ -99,7 +109,7 @@ namespace dev.budget.business.Models.Tests
         [Fact()]
         public void CannotPasswordWhiteSpaceTest()
         {
-            var model = new UserModel();
+            var model = new UserModel(this.context);
             Assert.Throws<BusinessException>(() =>
             {
                 model.CreateUser(1, "teste@teste.com", " ");
@@ -110,9 +120,13 @@ namespace dev.budget.business.Models.Tests
         [Fact()]
         public void GetUserTest()
         {
-            var model = new UserModel();
-            Assert.NotNull(model.GetUser("teste@teste.com", "Teste"));
-            
+            var model = new UserModel(this.context);
+            const string Username = "usuario@teste.com";
+            const string Password = "senhaTeste";
+            model.CreateUser(1, Username, Password);
+            var user = model.GetUser(Username, Password);
+            Assert.NotNull(user);
+
         }
     }
 }

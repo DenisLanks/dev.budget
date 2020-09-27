@@ -1,4 +1,7 @@
 ﻿using dev.budget.business.Entities;
+using dev.budget.business.Exceptions;
+using dev.budget.business.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +10,14 @@ namespace dev.budget.business.Models
 {
     public class BudgetModel: BaseModel
     {
+        PersonRepository personRepository;
+        BudgetRepository budgetRepository;
+        public BudgetModel(DbContext dbContext) : base(dbContext)
+        {
+            personRepository = new PersonRepository(dbContext);
+            budgetRepository = new BudgetRepository(dbContext);
+        }
+
         public decimal Calculate(Budget budget)
         {
             var result = CalculateDev(budget.DevCount);
@@ -56,7 +67,29 @@ namespace dev.budget.business.Models
             {
                 throw new ArgumentException("Usuário não informado", nameof(person));
             }
-            return new List<Budget>();
+            return this.budgetRepository.GetBudgetsByPerson(person);
+        }
+
+        public Budget CreateBudget(int person, int devCount, int desCount, int smCount, int poCount, int duration)
+        {
+            var budget = new Budget() { 
+                PersonId = person,
+                DevCount = devCount,
+                DesignerCount = desCount,
+                SMCount = smCount,
+                POCount = poCount,
+                Duration = duration
+            };
+
+            var p = personRepository.Find(person);
+
+            if (p == null) throw new BusinessException("Informe para quem(Pessoa) o orçamento será feito");
+
+            p.Budgets = new List<Budget>();
+            p.Budgets.Add(budget);
+            personRepository.Update(p);
+
+            return budget;
         }
     }
 }
