@@ -17,16 +17,20 @@ namespace dev.budget.business.Models
             personRepository = new PersonRepository(context);
         }
 
-        public Person CreatePerson(string name, string lastname, string cpf)
+        public Person CreatePerson(string name, string lastname, string cpf, string email, string phone)
         {
             ValidateString(name);
             ValidateString(lastname);
             ValidateString(cpf);
+            ValidateString(email);
+            ValidateString(phone);
             ValidateCPF(cpf);
             Person person = new Person() { 
                 Name = name,
                 LastName = lastname,
-                CPF = cpf
+                CPF = cpf,
+                Email = email,
+                Phone = phone
             };
             personRepository.Insert(person);
             return person;

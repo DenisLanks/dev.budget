@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dgMs4nScdz8etrw7RCzIo1P9IvpKXQo3K2Nu+yrB6Ano3lL3m42STdJMc7fAw8IdHPxfdmXNj3xXOV4f7tcaqQ==",
+  "dgSpecHash": "Ql2Mf3Ge3fwaM8sZJkpfE0Vm+D4KOK/6uf9djeqxp4dqMP5DAGksTMl2Lx8AdDytsNjJdWB9ORJr8gSt3LCLlA==",
   "success": true,
   "projectFilePath": "C:\\Users\\dmontes\\source\\repos\\dev.budget\\dev.budget.business\\dev.budget.business.csproj",
   "expectedPackageFiles": [
@@ -22,6 +22,7 @@
     "C:\\Users\\dmontes\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.8\\microsoft.extensions.primitives.3.1.8.nupkg.sha512",
     "C:\\Users\\dmontes\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\dmontes\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\dmontes\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\dmontes\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\dmontes\\.nuget\\packages\\system.collections.immutable\\1.7.1\\system.collections.immutable.1.7.1.nupkg.sha512",
     "C:\\Users\\dmontes\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",

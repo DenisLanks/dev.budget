@@ -29,6 +29,12 @@ namespace dev.budget
             });
             //services.AddDbContext<DevBudgetContext>(opt => opt.UseInMemoryDatabase("dev_budgets"));
             services.AddDbContext<DevBudgetContext>();
+
+            // If using IIS:
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

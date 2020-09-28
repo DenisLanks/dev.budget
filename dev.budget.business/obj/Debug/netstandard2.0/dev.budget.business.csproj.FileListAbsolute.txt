@@ -13,6 +13,6 @@ C:\Users\dmontes\source\repos\dev.budget\dev.budget.business\bin\Debug\netstanda
 C:\Users\dmontes\source\repos\dev.budget\dev.budget.business\obj\Debug\netstandard2.0\dev.budget.business.csprojAssemblyReference.cache
 C:\Users\dmontes\source\repos\dev.budget\dev.budget.business\obj\Debug\netstandard2.0\dev.budget.business.AssemblyInfoInputs.cache
 C:\Users\dmontes\source\repos\dev.budget\dev.budget.business\obj\Debug\netstandard2.0\dev.budget.business.AssemblyInfo.cs
-C:\Users\dmontes\source\repos\dev.budget\dev.budget.business\obj\Debug\netstandard2.0\dev.budget.business.csproj.CoreCompileInputs.cache
 C:\Users\dmontes\source\repos\dev.budget\dev.budget.business\obj\Debug\netstandard2.0\dev.budget.business.dll
 C:\Users\dmontes\source\repos\dev.budget\dev.budget.business\obj\Debug\netstandard2.0\dev.budget.business.pdb
+C:\Users\dmontes\source\repos\dev.budget\dev.budget.business\obj\Debug\netstandard2.0\dev.budget.business.csproj.CoreCompileInputs.cache

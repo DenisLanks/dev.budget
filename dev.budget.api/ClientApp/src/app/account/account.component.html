@@ -1,0 +1,103 @@
+<form action="api/account" method="post" (ngSubmit)='signup($event)' >
+    <div>
+        <h3>Dados Pessoais</h3>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name" id="name" placeholder="Nome"
+                        [(ngModel)]='account.name'>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <input class="form-control" type="text" name="lastName" id="lastName" placeholder="Sobrenome"
+                    [(ngModel)]='account.last_name'>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <input class="form-control" type="text" name="cpf" id="cpf" placeholder="CPF" [(ngModel)]='account.cpf'>
+
+            </div>
+            <div class="col-sm-4">
+                <input class="form-control" type="email" name="email" id="email" placeholder="E-mail"
+                    [(ngModel)]='account.email'>
+
+            </div>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" name="phone" id="phone" placeholder="Telefone"
+                    [(ngModel)]='account.phone'>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <input class="form-control" type="text" name="enterprise" id="enterprise"
+                 placeholder="Nome da Empresa"  [(ngModel)]='account.enterprise.name'>
+            </div>
+            <div class="col-6">
+                <input class="form-control" type="text" name="cnpj" id="cnpj"
+                 placeholder="CNPJ"  [(ngModel)]='account.enterprise.cnpj'>
+            </div>
+        </div>
+        <hr>
+        <h3>Endereço</h3>
+        <div class="row">
+            <div class="col-4">
+                <input class="form-control" type="text" name="postalCode" id="postalCode" 
+                placeholder="CEP" [(ngModel)]='account.address.postal_code'>
+            </div>
+            <div class="col-6">
+                <input class="form-control" type="text" name="address" id="address" 
+                placeholder="Endereço" [(ngModel)]='account.address.address'>
+            </div>
+            <div class="col-2">
+                <input class="form-control" type="text" name="number" id="number" 
+                placeholder="Número" [(ngModel)]='account.address.number'>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <input class="form-control" type="text" name="complement" id="complement" 
+                placeholder="Complemento" [(ngModel)]='account.address.complement'>
+            </div>
+            <div class="col-4">
+                <input class="form-control" type="text" name="state" id="state" 
+                placeholder="State" [(ngModel)]='account.address.state'>
+            </div>
+            <div class="col-4">
+                <input class="form-control" type="text" name="city" id="city" 
+                placeholder="Cidade" [(ngModel)]='account.address.city'>
+            </div>
+        </div>
+        <hr>
+        <h3>Dados de Acesso</h3>
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Dica de Senha</h5>
+                        <p class="card-text">Pelo menos 8 caracteres.</p>
+                        <p class="card-text">Pelo menos 1 caractere minúsculo.</p>
+                        <p class="card-text">Pelo menos 1 caractere maiúsculo.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password" id="password" 
+                    placeholder="Insira a senha"  [(ngModel)]='account.user.password'>
+                </div>
+
+                <div class="form-group">
+                    <input class="form-control" type="password" name="confirmPass" id="confirmPass"
+                        placeholder="Insira novamente" required>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-secondary" (click)='signin()'>Já possuo conta</button>
+                    <button class="btn btn-primary float-right" type="submit">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
