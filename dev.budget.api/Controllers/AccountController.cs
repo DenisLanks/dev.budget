@@ -21,36 +21,58 @@ namespace dev.budget.Controllers
     {
         UserModel userModel;
         private PersonModel personModel;
+        private EnterpriseModel enterpriseModel;
 
         public AccountController(DevBudgetContext context)
         {
             userModel = new UserModel(context);
             personModel = new PersonModel(context);
+            enterpriseModel = new EnterpriseModel(context);
         }
-        // GET: api/<AccountController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<AccountController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
+        
         // POST api/<AccountController>
         [HttpPost()]
         public string Post()
         {
             var content = Body;
             var account = JsonConvert.DeserializeObject<AccountTO>(content);
-            var person = personModel.CreatePerson(account.Name, account.LastName, account.CPF, account.Email, account.Phone);
+            try
+            {
+                var person = personModel.CreatePerson(account.Name, account.LastName, account.CPF, account.Email, account.Phone);
+                enterpriseModel.CreateEnterprise(account.Enterprise.Name, account.Enterprise.Cnpj);
+                userModel.CreateUser(person.Id, account.User.Username, account.User.Password);
+                return JsonConvert.SerializeObject(new ResponseTO() {
+                    Code= 200,
+                    Message = "Conta cadastrada com sucesso.",
+                    Data = person.Id
+                });
 
-            userModel.CreateUser(person.Id, account.User.Username, account.User.Password);
-            return "";
+            }
+            catch (BusinessException be)
+            {
+                return JsonConvert.SerializeObject(new ResponseTO()
+                {
+                    Code = 500,
+                    Message = be.Message
+                });
+            }
+            catch (ArgumentException ae)
+            {
+
+                return JsonConvert.SerializeObject(new ResponseTO()
+                {
+                    Code = 500,
+                    Message = ae.Message
+                });
+            }
+            catch (Exception)
+            {
+                return JsonConvert.SerializeObject(new ResponseTO()
+                {
+                    Code = 500,
+                    Message = "Erro desconhecido. Tente novamente mais tarde."
+                });
+            }
         }
 
         // PUT api/<AccountController>/5
@@ -59,7 +81,6 @@ namespace dev.budget.Controllers
         {
             var content = Body;
             var user = JsonConvert.DeserializeObject<User>(content);
-            var deserialize = JsonConvert.DeserializeObject(content);
             try
             {
                 user = userModel.GetUser(user.Username, user.Password);
@@ -67,23 +88,32 @@ namespace dev.budget.Controllers
                 {
                     throw new BusinessException("Login ou senha incorreta.");
                 }
-                return JsonConvert.SerializeObject(user);
+
+                return JsonConvert.SerializeObject(new ResponseTO()
+                {
+                    Code = 200,
+                    Message = "OK",
+                    Data = JsonConvert.SerializeObject(user)
+            });
             }
             catch (BusinessException be)
             {
-                return be.Message;
+                return JsonConvert.SerializeObject(new ResponseTO()
+                {
+                    Code = 500,
+                    Message = be.Message
+                });
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return "Erro ao verificar usuário";
+                return JsonConvert.SerializeObject(new ResponseTO()
+                {
+                    Code = 500,
+                    Message = "Erro ao verificar usuário. Tente novamente mais tarde."
+                });
             }
 
         }
 
-        // DELETE api/<AccountController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

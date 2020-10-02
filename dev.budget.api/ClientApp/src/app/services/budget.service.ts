@@ -1,31 +1,29 @@
 import { Injectable, Inject } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { environment } from '../../environments/environment';
-import { Observable, throwError } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
-import { IUser } from "../interfaces/IUser";
+import { tap, catchError } from "rxjs/operators";
+import { throwError } from "rxjs";
+import { Budget } from "../models/budget.model";
 
 @Injectable({
     providedIn:"root"
 })
-export class AccountService {
-    baseurl :string;
+export class BudgetService {
+    baseurl: string;
+
     constructor(private http:HttpClient, @Inject('BASE_URL') baseUrl: string) {
         this.baseurl = baseUrl;
     }
 
-    signin(username: string, password: string): Observable<any>{
-        return this.http.post<any>( `${this.baseurl}api/account/login`,{
-            username,
-            password
-        });
+    save(payload: Budget, callback:Function){
+        return this.http.post( `${this.baseurl}api/budget/1`,payload)
+        .pipe(tap(result => callback(result,null)),catchError(this.handlerError));
     }
 
-    signup(payload: any, callback:Function){
-        return this.http.post( `${this.baseurl}api/account`,payload)
-        .pipe(tap(result => callback(result)),catchError(this.handlerError));
+    getBudgets(id:number){
+        return this.http.get<any>( `${this.baseurl}api/budget/${id}`)
+        .pipe(tap(result => {console.log(result)}),catchError(this.handlerError));
     }
-
+    
     handlerError(err: HttpErrorResponse) {
         let errorMessage = '';
         if (err.error instanceof ErrorEvent) {
@@ -33,6 +31,8 @@ export class AccountService {
         } else {
             errorMessage = `O servidor retornou o código: ${err.status}, a mensagem do erro: ${err.message}`
         }
+        console.error(errorMessage);
         return throwError(errorMessage);
     }
+   
 }

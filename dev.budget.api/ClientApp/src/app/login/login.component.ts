@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,21 +13,28 @@ export class LoginComponent implements OnInit {
   password: string;
   accountService: AccountService;
   
-  constructor(service: AccountService) { 
+  constructor(service: AccountService, private router: Router) { 
     this.accountService = service;
   }
 
   ngOnInit() {
   }
 
-  signin(){
-    console.log(`usuário: ${this.username} senha:${this.password}`);
+  signin(event){
+    event.preventDefault();
     if (!this.validate()) {
-      alert("Informe seus dados de acesso.")
+      alert("Informe seus dados de acesso.");
+      return;
     }
     this.accountService.signin(this.username, this.password)
     .subscribe({
-      next: data=>console.log(data),
+      next: data=>{
+        if (data.Code == 200 || data.Code == "200") {
+          this.router.navigate(["home"]);
+        }else{
+          alert(data.Message);
+        }
+      },
       error: err=>console.error(err)
     });
 

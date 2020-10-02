@@ -12,6 +12,9 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { AccountComponent } from './account/account.component';
 import { BudgetComponent } from './budget/budget.component';
 import { LoginComponent } from './login/login.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+ 
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
@@ -29,12 +32,13 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: LoginComponent, pathMatch: 'full' },
       { path: 'budget', component: BudgetComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'login', component: LoginComponent },
+      { path: 'home', component: HomeComponent },
       { path: 'account', component: AccountComponent },
-    ])
+    ]),
+    NgxMaskModule.forRoot(options)
   ],
   providers: [],
   bootstrap: [AppComponent]

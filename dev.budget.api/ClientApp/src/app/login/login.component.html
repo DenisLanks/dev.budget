@@ -1,7 +1,7 @@
 <div class="centered-box">
     <div class="card">
         <div class="card-body">
-            <form action="/account/login" method="post">
+            <form (ngSubmit)='signin($event)'>
                 <div class="form-group">
                     <label for="username">Usuário</label>
                     <input class="form-control" required type="text" name="username" id="username" placeholder="username@exemplo.com" [(ngModel)]='username'>
@@ -13,7 +13,7 @@
                 </div>
         
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" (click)='signin()'>Entrar</button>
+                    <button type="submit" class="btn btn-primary">Entrar</button>
                     <a class="btn btn-secondary float-right" [routerLink]="['/account']">Cadastrar</a>
                 </div>
             </form>

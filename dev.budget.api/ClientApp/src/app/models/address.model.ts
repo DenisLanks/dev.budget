@@ -1,5 +1,5 @@
 export class Address {
-    addrass:string;
+    address:string;
     number:string;
     postal_code:string;
     complement:string;

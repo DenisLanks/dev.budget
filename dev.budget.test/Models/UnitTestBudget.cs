@@ -77,7 +77,7 @@ namespace dev.budget.business.Models.Tests
         {
             var model = new BudgetModel(context);
             var personModel = new PersonModel(context);
-            var person = personModel.CreatePerson("FULANO", "DE TAL", "12345678909");
+            var person = personModel.CreatePerson("FULANO", "DE TAL", "12345678909","denislanks@hotmail.com","9999999999");
             model.CreateBudget(person.Id, 1, 1, 1, 1, 1);
             Assert.NotEmpty(model.GetBudgets(person.Id));
         }

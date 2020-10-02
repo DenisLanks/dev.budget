@@ -36,6 +36,11 @@ namespace dev.budget.business.Models
             return person;
         }
 
+        public bool Exists(int id)
+        {
+           return  personRepository.Find(id) != null;
+        }
+
         private void ValidateCPF(string cpf)
         {
 

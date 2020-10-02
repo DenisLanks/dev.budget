@@ -15,7 +15,8 @@
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <input class="form-control" type="text" name="cpf" id="cpf" placeholder="CPF" [(ngModel)]='account.cpf'>
+                <input class="form-control" type="text" name="cpf" id="cpf" placeholder="CPF" 
+                [(ngModel)]='account.cpf'  mask="000.000.000-00">
 
             </div>
             <div class="col-sm-4">
@@ -25,7 +26,7 @@
             </div>
             <div class="col-sm-4">
                 <input class="form-control" type="text" name="phone" id="phone" placeholder="Telefone"
-                    [(ngModel)]='account.phone'>
+                    [(ngModel)]='account.phone' mask="(00) 00000-0000">
 
             </div>
         </div>
@@ -36,7 +37,8 @@
             </div>
             <div class="col-6">
                 <input class="form-control" type="text" name="cnpj" id="cnpj"
-                 placeholder="CNPJ"  [(ngModel)]='account.enterprise.cnpj'>
+                 placeholder="CNPJ"  [(ngModel)]='account.enterprise.cnpj'
+                 mask="00.000.000/0000-00">
             </div>
         </div>
         <hr>
@@ -44,7 +46,8 @@
         <div class="row">
             <div class="col-4">
                 <input class="form-control" type="text" name="postalCode" id="postalCode" 
-                placeholder="CEP" [(ngModel)]='account.address.postal_code'>
+                placeholder="CEP" [(ngModel)]='account.address.postal_code'
+                mask="00000-000">
             </div>
             <div class="col-6">
                 <input class="form-control" type="text" name="address" id="address" 
@@ -86,12 +89,12 @@
             <div class="col-6">
                 <div class="form-group">
                     <input class="form-control" type="password" name="password" id="password" 
-                    placeholder="Insira a senha"  [(ngModel)]='account.user.password'>
+                    placeholder="Insira a senha"  [(ngModel)]='account.user.password' required minlength="8">
                 </div>
 
                 <div class="form-group">
                     <input class="form-control" type="password" name="confirmPass" id="confirmPass"
-                        placeholder="Insira novamente" required>
+                        placeholder="Insira novamente" required [(ngModel)]='confirmPassword'>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-secondary" (click)='signin()'>Já possuo conta</button>
