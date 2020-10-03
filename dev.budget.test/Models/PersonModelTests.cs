@@ -21,7 +21,7 @@ namespace dev.budget.business.Models.Tests
         public void CreatePersonTest()
         {
             var model = new PersonModel(context);
-            var person = model.CreatePerson("FULANO", "DE TAL", "12345678909");
+            var person = model.CreatePerson("FULANO", "DE TAL", "12345678909", "teste@mail.com","99999999999");
             Assert.NotNull(person);
             Assert.True(person.Id != 0, "Falha ao cadastrar pessoa.");
         }
@@ -32,20 +32,20 @@ namespace dev.budget.business.Models.Tests
             var model = new PersonModel(context);
             Assert.Throws<ArgumentException>(() =>
             {
-                model.CreatePerson("", "de tal", "0000000000");
+                model.CreatePerson("", "de tal", "0000000000", "teste@mail.com","99999999999");
             });
             Assert.Throws<ArgumentException>(() =>
             {
-                model.CreatePerson("fulano", "", "0000000000");
+                model.CreatePerson("fulano", "", "0000000000", "teste@mail.com","99999999999");
             });
 
             Assert.Throws<BusinessException>(() =>
             {
-                model.CreatePerson("fulano", "de tal", "132321323u");
+                model.CreatePerson("fulano", "de tal", "132321323u", "teste@mail.com","99999999999");
             });
             Assert.Throws<BusinessException>(() =>
             {
-                model.CreatePerson("fulano", "de tal", "000.000.000-00");
+                model.CreatePerson("fulano", "de tal", "000.000.000-00", "teste@mail.com","99999999999");
             });
         }
 

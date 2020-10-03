@@ -123,7 +123,7 @@ namespace dev.budget.business.Models.Tests
             var model = new UserModel(this.context);
             const string Username = "usuario@teste.com";
             const string Password = "senhaTeste";
-            model.CreateUser(1, Username, Password);
+            model.CreateUser(1000, Username, Password);
             var user = model.GetUser(Username, Password);
             Assert.NotNull(user);
 
