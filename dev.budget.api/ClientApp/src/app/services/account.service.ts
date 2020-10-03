@@ -4,12 +4,14 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { IUser } from "../interfaces/IUser";
+import { User } from "../models/user.model";
 
 @Injectable({
     providedIn:"root"
 })
 export class AccountService {
     baseurl :string;
+    user: any;
     constructor(private http:HttpClient, @Inject('BASE_URL') baseUrl: string) {
         this.baseurl = baseUrl;
     }

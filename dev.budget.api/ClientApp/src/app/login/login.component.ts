@@ -18,6 +18,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.accountService.user !== undefined) {
+      this.router.navigate(["home"]);
+    }
   }
 
   signin(event){
@@ -30,6 +33,8 @@ export class LoginComponent implements OnInit {
     .subscribe({
       next: data=>{
         if (data.Code == 200 || data.Code == "200") {
+          this.accountService.user = JSON.parse(data.Data);
+          console.log(this.accountService);
           this.router.navigate(["home"]);
         }else{
           alert(data.Message);

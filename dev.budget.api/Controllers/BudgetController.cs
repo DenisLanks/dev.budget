@@ -62,7 +62,6 @@ namespace dev.budget.Controllers
         [HttpPost("{id}")]
         public void Post(int id,[FromBody]BudgetTO budget)
         {
-
             bool exists = personModel.Exists(id);
             if (exists)
             {
@@ -70,5 +69,22 @@ namespace dev.budget.Controllers
             }
         }
 
+        [HttpPost("calculate")]
+        public string Calculate([FromBody]BudgetTO budget)
+        {
+            budget.DesTotal = budgetModel.CalculateDesigner(budget.DesCount);
+            budget.DevTotal = budgetModel.CalculateDev(budget.DevCount);
+            budget.SMTotal = budgetModel.CalculateSM(budget.SMCount);
+            budget.POTotal = budgetModel.CalculatePO(budget.POCount);
+            budget.DurTotal = budgetModel.CalculateDuration(budget.Duration);
+            budget.Total =   this.budgetModel.Calculate(new Budget() { 
+                DesignerCount = budget.DesCount,
+                DevCount = budget.DevCount,
+                Duration = budget.Duration,
+                POCount = budget.POCount,
+                SMCount = budget.SMCount
+            });
+            return JsonConvert.SerializeObject(budget);
+        }
     }
 }

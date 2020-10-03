@@ -13,6 +13,6 @@
     <td>{{budget.design_count}}</td>
     <td>{{budget.sm_count}}</td>
     <td>{{budget.po_count}}</td>
-    <td>{{budget.total}}</td>
+    <td>{{budget.total | currency: 'BRL':'symbol':'0.0-2' }}</td>
   </tr>
 </table>

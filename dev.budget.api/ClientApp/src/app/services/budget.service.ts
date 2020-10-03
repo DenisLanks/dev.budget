@@ -14,8 +14,8 @@ export class BudgetService {
         this.baseurl = baseUrl;
     }
 
-    save(payload: Budget, callback:Function){
-        return this.http.post( `${this.baseurl}api/budget/1`,payload)
+    save(id:number, payload: Budget, callback:Function){
+        return this.http.post( `${this.baseurl}api/budget/${id}`,payload)
         .pipe(tap(result => callback(result,null)),catchError(this.handlerError));
     }
 
@@ -33,6 +33,11 @@ export class BudgetService {
         }
         console.error(errorMessage);
         return throwError(errorMessage);
+    }
+
+    calculate(budget:Budget){
+        return this.http.post( `${this.baseurl}api/budget/calculate`, budget)
+        .pipe(catchError(this.handlerError));
     }
    
 }

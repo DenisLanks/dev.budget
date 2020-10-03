@@ -1,4 +1,4 @@
-<form (ngSubmit)="save($event)">
+<form (ngSubmit)="save($event)" id="budgetForm">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Dados do Projeto</h4>
@@ -7,16 +7,18 @@
                     <div class="form-group">
                         <label for="dev_count">Dev Full Stack </label>
                         <input name="dev_count" id="dev_count" type="number" class="form-control" 
-                        placeholder="Total Devs Full Stack" [(ngModel)]="budget.devCount">
-                        <span>R$ --</span>
+                        placeholder="Total Devs Full Stack" [(ngModel)]="budget.devCount"
+                        (blur)="calculate()"  (change)="calculate()">
+                        <span>{{budget.devTotal | currency: 'BRL'}}</span>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="des_count">Designer UI/UX </label>
                         <input name="des_count" id="des_count" type="number" class="form-control" 
-                        placeholder="Total Designers UI/UX"  [(ngModel)]="budget.desCount">
-                        <span>R$ --</span>
+                        placeholder="Total Designers UI/UX"  [(ngModel)]="budget.desCount"
+                        (blur)="calculate()"  (change)="calculate()">
+                        <span>{{budget.desTotal | currency: 'BRL'}}</span>
                     </div>
                 </div>
             </div>
@@ -25,16 +27,18 @@
                     <div class="form-group">
                         <label for="sm_count">Scrum Masters </label>
                         <input name="sm_count" id="sm_count" type="number" class="form-control" 
-                        placeholder="Total Scrum Masters"  [(ngModel)]="budget.smCount">
-                        <span>R$ --</span>
+                        placeholder="Total Scrum Masters"  [(ngModel)]="budget.smCount"
+                        (blur)="calculate()"  (change)="calculate()">
+                        <span>{{budget.smTotal | currency: 'BRL'}}</span>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="po_count">Product Owners </label>
                         <input name="po_count" id="po_count" type="number" class="form-control" 
-                        placeholder="Total Product Owners"  [(ngModel)]="budget.poCount">
-                        <span>R$ --</span>
+                        placeholder="Total Product Owners"  [(ngModel)]="budget.poCount"
+                        (blur)="calculate()"  (change)="calculate()">
+                        <span>{{budget.poTotal | currency: 'BRL'}}</span>
                     </div>
                 </div>
             </div>
@@ -43,14 +47,15 @@
                     <div class="form-group">
                         <label for="duration">Duração</label>
                         <input name="duration" id="duration" type="number" class="form-control" 
-                        placeholder="Duração" min="10" [(ngModel)]="budget.duration">
-                        <span>R$ --</span>
+                        placeholder="Duração" min="10" [(ngModel)]="budget.duration"
+                        (blur)="calculate()" (change)="calculate()">
+                        <span>{{budget.durTotal | currency: 'BRL'}}</span>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="col-6">
                         <div class="form-group">
-                            <h3>R$</h3>
+                            <h3>{{budget.total | currency: 'BRL'}}</h3>
                         </div>
                     </div>
                 </div>
@@ -58,7 +63,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        <button class="btn btn-secondary">Cancelar</button>
+                        <button class="btn btn-secondary" type="button" (click)="cancel()" >Cancelar</button>
                         <button class="btn btn-primary float-right" type="submit"
                         >Salvar</button>
                     </div>
